@@ -9,14 +9,12 @@
 </script>
 <div class="form-container">
     <h1>Hi, Welcome to the chat!</h1>
-        <form id="popupForm">
             <label for="name">Username:</label>
             <input type="text" id="name" name="name" bind:value={username} on:keydown={(event) => {
-                if (event.key == 'ENTER') {
+                if (event.key == 'Enter') {
                     navigate(`/chat?username=${username}`)
                 }
             }} required>
-        </form>
         <br>
         <br>
         <button on:click={() => navigate(`/chat?username=${username}`)}>Let's chat!</button>
