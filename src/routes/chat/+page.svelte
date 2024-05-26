@@ -1,46 +1,61 @@
 <script>
     import { supabase } from "$lib/supabaseClient.js"
-    import { page } from '$app/stores';
-    import { goto } from "$app/navigation"
-
-    let messages;
-    $: messages = []
     
-    // gets the page url and derives the username
-    const url = $page.url;
-    let username = url.searchParams.get("username") 
-    console.log(username)
-    if (!username) {
-        goto("/")
-    }
+    // gets the data from the preload function, which includes the chat history and the current username
+    export let data
+    const username = data['username']
 
-    // subscribes to the broadcast channel and starts receiving messages
-    const chat_channel = supabase.channel("chatroom")
-    .on("postgres_changes", 
+    // used for the input 
+    let message;
+
+    // reactive variable that changes when a new message is sent to the database
+    $: messages = data['data']
+
+    // initiates a channel that listens for INSERT events in the database, and gets the new messages
+    const channelA = supabase.channel("chatroom")
+    
+    channelA
+    .on(
+    'postgres_changes',
     {
-    event: "*", 
-    schema:"public", 
-    table:"Users"
-    }, (payload) => {
-        console.log(payload)
-        messages.push(payload.new)
+      event: 'INSERT',
+      schema: 'public',
+      table: 'messages',
+    },
+    (payload) => {
+      data['data'].push(payload['new'])
+      data['data'] = data['data']
     }
-).subscribe()
+  )
+  .subscribe((status) => {
+    console.log(status)
 
-// function sendMessage(message) {
-//     supabase.channel("chatroom")
-//     .subscribe((status) => {
-//     if (status === 'SUBSCRIBED') {
-//       channel.send({
-//         type: 'broadcast',
-//         event: '*',
-//         payload: { message },
-//       })
-//     }
-//   })
-
+    }
+  )
 
 </script>
-{#each messages as m}
-    <p>{m}</p>
+<div class="messages-container">
+{#each messages as message}
+  <div>
+    <p>{message['id']}</p>
+    <h2>{message['username']}</h2>
+    <p>{message['message']}</p>
+  </div>
+  <hr>
 {/each}
+</div>
+
+<input type="text" bind:value={message}>
+<!-- Inserts the message to the database -->
+<button on:click={ async () => {
+  if (!message) {
+    alert('You have to write something!')
+  } else {
+const { error } = await supabase
+  .from('messages')
+  .insert({username, message})
+  }
+  message = ""
+}}>Send</button>
+
+
