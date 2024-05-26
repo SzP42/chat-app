@@ -34,6 +34,21 @@
   margin: 0 auto;
 }
 
+button {
+    border-radius: 15%;
+  }
+
+  button:hover {
+    background-color: rgb(45, 42, 42);
+    color: white;
+    cursor: pointer;
+  }
+
+  a { 
+    opacity: 50%;
+    color: rgb(126, 120, 120);
+  }
+
 
 
 </style>
