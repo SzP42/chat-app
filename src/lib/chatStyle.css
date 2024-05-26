@@ -1,0 +1,20 @@
+.messages-container {
+    height: 600px; 
+    overflow: auto; 
+  }
+
+  .delete-button:hover {
+    background-color: rgb(220, 81, 81);
+    color: white;
+    cursor: pointer;
+  }
+
+  button {
+    border-radius: 15%;
+  }
+
+  .send-button:hover {
+    background-color: rgb(45, 42, 42);
+    color: white;
+    cursor: pointer;
+  }

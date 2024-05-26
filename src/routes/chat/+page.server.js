@@ -7,6 +7,7 @@ export const load = async (serverLoadEvent) => {
           .schema('public')
           .from('messages')
           .select("*")
+          .order('id', {ascending: true})
           return {data}
             } catch (err) {
                 console.error(err)
