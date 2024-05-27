@@ -18,3 +18,29 @@
     color: white;
     cursor: pointer;
   }
+
+  .form-container {
+    width: 50%; 
+    margin: 0 auto;
+  }
+  
+  button {
+      border-radius: 15%;
+    }
+  
+    button:hover {
+      background-color: rgb(45, 42, 42);
+      color: white;
+      cursor: pointer;
+    }
+  
+    a { 
+      opacity: 50%;
+      color: rgb(126, 120, 120);
+    }
+
+    body {
+      background-color: #303339;
+      color: azure;
+      font-family: Arial, Helvetica, sans-serif;
+    }

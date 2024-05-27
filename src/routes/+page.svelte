@@ -1,5 +1,6 @@
 <script>
     import { goto } from "$app/navigation"
+    import "$lib/chatStyle.css"
 
     let username = "";
 
@@ -7,6 +8,9 @@
         goto(url)
     }
 </script>
+
+<body>
+
 <div class="form-container">
     <h1>Hi, Welcome to the chat!</h1>
             <label for="name">Username:</label>
@@ -23,30 +27,4 @@
         <a href="https://linkedin.com/in/patrik-szabó-328a0b248">LinkedIn</a>
     </div>
 
-
-
-<style lang="scss">
-
-.form-container {
-  width: 50%; 
-  margin: 0 auto;
-}
-
-button {
-    border-radius: 15%;
-  }
-
-  button:hover {
-    background-color: rgb(45, 42, 42);
-    color: white;
-    cursor: pointer;
-  }
-
-  a { 
-    opacity: 50%;
-    color: rgb(126, 120, 120);
-  }
-
-
-
-</style>
+</body>

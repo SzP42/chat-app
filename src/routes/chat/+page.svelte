@@ -82,6 +82,7 @@ const { error } = await supabase
 
 </script>
 
+<body>
 
 <br>
 <br>
@@ -112,3 +113,4 @@ const { error } = await supabase
 <button class="send-button" on:click={sendMessage}>Send</button>
 
 
+</body>
